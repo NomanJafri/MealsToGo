@@ -17,16 +17,13 @@ import {
 
 export default function RestaurantInfoCard({ restaurant = {} }) {
   const {
-    name = "Noman's Cafe",
-    icon = "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png",
-    photos = [
-      "https://www.foodiesfeed.com/wp-content/uploads/2019/06/top-view-for-box-of-2-burgers-home-made-600x899.jpg",
-      "https://picsum.photos/700",
-    ],
-    address = "100 Happy Happy Avenue, London",
-    isOpenNow = true,
-    rating = 4,
-    isClosedTemporarily = true,
+    name,
+    icon,
+    photos,
+    vicinity,
+    isOpenNow,
+    rating,
+    isClosedTemporarily,
   } = restaurant;
 
   const ratingArray = Array.from(new Array(Math.floor(rating)));
@@ -53,7 +50,7 @@ export default function RestaurantInfoCard({ restaurant = {} }) {
               <Icon source={{ uri: icon }} />
             </SectionEnd>
           </Section>
-          <Address>{address}</Address>
+          <Address>{vicinity}</Address>
         </Info>
       </RestaurantCard>
     </>

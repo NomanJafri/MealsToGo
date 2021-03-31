@@ -1,6 +1,6 @@
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
 import React from "react";
-import { View, Text } from "react-native";
+import { Text } from "react-native";
 import { ThemeProvider } from "styled-components/native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -16,6 +16,7 @@ import { theme } from "./src/infrastructure/theme/index";
 import RestaurantsScreen, {
   StyledSafeAreaView,
 } from "./src/features/restaurants/screens/restaurants.screen";
+import { RestaurantContextProvider } from "./src/services/restaurants/restaurants.context";
 
 function MapScreen() {
   return (
@@ -35,25 +36,22 @@ function SettingsScreen() {
 
 const Tab = createBottomTabNavigator();
 
+const TAB_ICONS = {
+  Restaurants: "restaurant",
+  Settings: "settings",
+  Map: "map",
+};
+
+const createScreenOptions = ({ route }) => ({
+  tabBarIcon: ({ color, size }) => {
+    return <Ionicons name={TAB_ICONS[route.name]} size={size} color={color} />;
+  },
+});
+
 function MyTabs() {
   return (
     <Tab.Navigator
-      screenOptions={({ route }) => ({
-        tabBarIcon: ({ focused, color, size }) => {
-          let iconName;
-
-          if (route.name === "Restaurants") {
-            iconName = focused ? "restaurant" : "restaurant-outline";
-          } else if (route.name === "Settings") {
-            iconName = focused ? "settings" : "settings-outline";
-          } else if (route.name === "Map") {
-            iconName = focused ? "map" : "map-outline";
-          }
-
-          // You can return any component that you like here!
-          return <Ionicons name={iconName} size={size} color={color} />;
-        },
-      })}
+      screenOptions={createScreenOptions}
       tabBarOptions={{
         activeTintColor: "tomato",
         inactiveTintColor: "gray",
@@ -80,9 +78,11 @@ export default function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <NavigationContainer>
-          <MyTabs />
-        </NavigationContainer>
+        <RestaurantContextProvider>
+          <NavigationContainer>
+            <MyTabs />
+          </NavigationContainer>
+        </RestaurantContextProvider>
       </ThemeProvider>
       <ExpoStatusBar style="auto" />
     </>
