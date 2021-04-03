@@ -6,12 +6,19 @@ export const LocationContext = createContext();
 
 export const LocationContextProvider = ({ children }) => {
   const [keyword, setKeyword] = useState("San Francisco");
-  const [location, setLocation] = useState({
-    lat: 37.7749295,
-    lng: -122.4194155,
-  });
+  const [location, setLocation] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+
+  useEffect(() => {
+    setIsLoading(true);
+    locationRequest(keyword.toLowerCase())
+      .then(locationTransform)
+      .then((result) => {
+        setIsLoading(false);
+        setLocation(result);
+      });
+  }, []);
 
   const onSearch = (searchKeyword) => {
     setIsLoading(true);
