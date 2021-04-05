@@ -1,7 +1,7 @@
 import React from "react";
-import { Platrform } from "react-native";
+import { Platform } from "react-native";
 import styled from "styled-components/native";
-import WebView from "react-native-webview";
+// import WebView from "react-native-webview";
 import { Text } from "../typography/text.component";
 
 const CompactImage = styled.Image`
@@ -9,12 +9,12 @@ const CompactImage = styled.Image`
   width: 120px;
   height: 100px;
 `;
-
-const CompactWebview = styled(WebView)`
-  border-radius: 10px;
-  width: 120px;
-  height: 100px;
-`;
+// android I am using Wileyfox Swift is working perfectly with styled.Image no need for webview
+// const CompactWebview = styled(WebView)`
+//   border-radius: 10px;
+//   width: 120px;
+//   height: 100px;
+// `;
 
 const Item = styled.View`
   padding: 10px;
@@ -22,16 +22,13 @@ const Item = styled.View`
   align-items: center;
 `;
 
-const isAndroid = Platrform.os === "android";
+// const isAndroid = Platform.OS === "android";
 
 const CompactRestaurantInfo = ({ restaurant }) => {
+  // const Image = isAndroid ? CompactWebview : CompactImage;
   return (
     <Item>
-      {isAndroid ? (
-        <CompactWebview source={{ uri: restaurant.photos[0] }} />
-      ) : (
-        <CompactImage source={{ uri: restaurant.photos[0] }} />
-      )}
+      <CompactImage source={{ uri: restaurant.photos[0] }} />
       <Text center variant="caption" numberOfLines={3}>
         {restaurant.name}
       </Text>

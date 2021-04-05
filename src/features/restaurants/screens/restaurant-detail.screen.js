@@ -9,7 +9,7 @@ export const RestaurantDetailScreen = ({ route }) => {
   const [lunchExpanded, setLunchExpanded] = useState(false);
   const [dinnerExpanded, setDinnerExpanded] = useState(false);
   const [drinksExpanded, setDrinksExpanded] = useState(false);
-  const restaurant = route.params.item;
+  const { restaurant } = route.params;
   return (
     <StyledSafeAreaView>
       <RestaurantInfoCard restaurant={restaurant} />
