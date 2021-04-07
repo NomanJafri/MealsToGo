@@ -1,5 +1,5 @@
 import styled from "styled-components/native";
-import { Text, View, Image } from "react-native";
+import { Text, View, Image, TouchableOpacity } from "react-native";
 import { Card } from "react-native-paper";
 
 export const Info = styled.View`

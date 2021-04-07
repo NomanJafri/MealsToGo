@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components/native";
 import {
   SafeAreaView,
@@ -10,8 +10,10 @@ import { ActivityIndicator } from "react-native-paper";
 
 import { Search } from "../components/search.component";
 import RestaurantInfoCard from "../components/restaurant-info-card.component";
+import { FavouritesBar } from "../../../components/favourites/favourites-bar.component";
 
 import { RestaurantsContext } from "../../../services/restaurants/restaurants.context";
+import { FavouritesContext } from "../../../services/favourites/favourites.context";
 
 export const StyledSafeAreaView = styled(SafeAreaView)`
   flex: 1;
@@ -44,9 +46,20 @@ const Error = styled.Text`
 
 const RestaurantsScreen = ({ navigation }) => {
   const { restaurants, isLoading, error } = useContext(RestaurantsContext);
+  const { favourites } = useContext(FavouritesContext);
+  const [isFavourtiesToggled, setIsFavouritesToggled] = useState(false);
   return (
     <StyledSafeAreaView>
-      <Search />
+      <Search
+        isFavourtiesToggled={isFavourtiesToggled}
+        onFavouritesToggled={() => setIsFavouritesToggled(!isFavourtiesToggled)}
+      />
+      {isFavourtiesToggled ? (
+        <FavouritesBar
+          favourites={favourites}
+          onNavigate={navigation.navigate}
+        />
+      ) : null}
 
       {isLoading ? <Loading /> : error ? <Error>{error}</Error> : null}
       <RestaurantList

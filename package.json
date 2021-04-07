@@ -11,6 +11,7 @@
   "dependencies": {
     "@expo-google-fonts/lato": "^0.1.0",
     "@expo-google-fonts/oswald": "^0.1.0",
+    "@react-native-async-storage/async-storage": "^1.15.2",
     "@react-native-community/masked-view": "0.1.10",
     "@react-navigation/bottom-tabs": "^5.11.8",
     "@react-navigation/native": "^5.9.3",
@@ -39,5 +40,18 @@
     "eslint": "^7.22.0",
     "prettier": "^2.2.1"
   },
-  "private": true
+  "private": true,
+  "name": "mealstogo",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NomanJafri/MealsToGo.git"
+  },
+  "author": "Noman Jafri <snomanh@hotmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/NomanJafri/MealsToGo/issues"
+  },
+  "homepage": "https://github.com/NomanJafri/MealsToGo#readme",
+  "description": ""
 }
